@@ -1,555 +1,286 @@
+
 <!DOCTYPE html>
 <html lang="uz">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Informatika va IT asoslari — 30 talik Onlayn Test</title>
-    <style>
-        :root {
-            --primary: #2563eb;
-            --primary-hover: #1d4ed8;
-            --bg: #f1f5f9;
-            --card: #ffffff;
-            --text: #1e293b;
-            --border: #cbd5e1;
-            --success: #16a34a;
-            --danger: #dc2626;
-        }
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        body {
-            background-color: var(--bg);
-            color: var(--text);
-            padding-top: 80px;
-            padding-bottom: 50px;
-        }
-        /* Yuqori panel va taymer */
-        .header-bar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background: #0f172a;
-            color: #fff;
-            padding: 15px 25px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1000;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        }
-        .header-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-        }
-        .timer-box {
-            background: #1e293b;
-            border: 2px solid #38bdf8;
-            padding: 8px 18px;
-            border-radius: 8px;
-            font-size: 1.25rem;
-            font-weight: bold;
-            color: #38bdf8;
-            letter-spacing: 1px;
-        }
-        .timer-warning {
-            border-color: #ef4444;
-            color: #ef4444;
-            animation: pulse 1s infinite;
-        }
-        @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.6; }
-            100% { opacity: 1; }
-        }
-        .container {
-            max-width: 850px;
-            margin: 0 auto;
-            padding: 0 15px;
-        }
-        .intro-card, .result-card {
-            background: var(--card);
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-            text-align: center;
-            margin-bottom: 25px;
-        }
-        .question-card {
-            background: var(--card);
-            padding: 22px 25px;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            margin-bottom: 20px;
-            border-left: 5px solid var(--primary);
-        }
-        .question-text {
-            font-size: 1.08rem;
-            font-weight: 600;
-            margin-bottom: 15px;
-            line-height: 1.5;
-        }
-        .options-list {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .option-label {
-            display: flex;
-            align-items: center;
-            padding: 12px 15px;
-            border: 1.5px solid var(--border);
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .option-label:hover {
-            background-color: #eff6ff;
-            border-color: var(--primary);
-        }
-        .option-label input {
-            margin-right: 12px;
-            transform: scale(1.2);
-            accent-color: var(--primary);
-        }
-        .btn {
-            background: var(--primary);
-            color: #fff;
-            border: none;
-            padding: 14px 32px;
-            font-size: 1.05rem;
-            font-weight: 600;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background 0.2s;
-            margin-top: 15px;
-        }
-        .btn:hover {
-            background: var(--primary-hover);
-        }
-        .btn-retry {
-            background: var(--danger);
-        }
-        .btn-retry:hover {
-            background: #b91c1c;
-        }
-        .correct-answer {
-            background-color: #dcfce7 !important;
-            border-color: var(--success) !important;
-            color: #14532d;
-            font-weight: 600;
-        }
-        .wrong-answer {
-            background-color: #fee2e2 !important;
-            border-color: var(--danger) !important;
-            color: #7f1d1d;
-        }
-        .hidden {
-            display: none;
-        }
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            margin: 20px 0;
-        }
-        .stat-box {
-            background: #f8fafc;
-            padding: 15px;
-            border-radius: 8px;
-            border: 1px solid var(--border);
-        }
-        .stat-value {
-            font-size: 1.6rem;
-            font-weight: bold;
-            color: var(--primary);
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IT Asoslari — Online Test</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:Segoe UI,sans-serif}
+body{background:linear-gradient(135deg,#eef2ff,#e0f2fe);color:#1e293b;padding:100px 15px 40px}
+.header{position:fixed;top:0;left:0;width:100%;background:#0f172a;color:white;padding:15px 5%;display:flex;justify-content:space-between;align-items:center;z-index:10}
+.header h3{font-size:16px}
+.timer{font-size:24px;font-weight:bold;color:#38bdf8;background:#1e293b;border:2px solid #38bdf8;padding:8px 15px;border-radius:10px}
+.warning{color:#ef4444;border-color:#ef4444;animation:pulse 1s infinite}
+@keyframes pulse{50%{opacity:.5}}
+.container{max-width:850px;margin:auto}
+.panel{background:white;padding:30px;border-radius:20px;box-shadow:0 8px 30px #0001;text-align:center;margin-bottom:20px}
+h2{color:#4338ca;margin-bottom:15px}
+p{line-height:1.7;color:#64748b;margin:12px 0}
+.btn{background:linear-gradient(135deg,#6366f1,#4f46e5);color:white;border:0;padding:14px 25px;border-radius:10px;font-size:16px;font-weight:bold;cursor:pointer;margin-top:15px}
+.btn:hover{opacity:.85}
+.hidden{display:none!important}
+.progress{background:#e2e8f0;height:10px;border-radius:20px;overflow:hidden;margin-top:10px}
+.progress-fill{height:100%;width:0;background:linear-gradient(90deg,#6366f1,#06b6d4);transition:.3s}
+.progress-card{background:white;padding:18px;border-radius:14px;margin-bottom:20px}
+.progress-info{display:flex;justify-content:space-between;font-weight:bold}
+.question{background:white;padding:23px;border-radius:16px;margin-bottom:18px;border-left:5px solid #6366f1;box-shadow:0 4px 15px #0001}
+.q-number{display:inline-block;background:#eef2ff;color:#4338ca;padding:7px 12px;border-radius:8px;font-weight:bold;margin-bottom:15px}
+.q-text{font-size:17px;font-weight:bold;line-height:1.6;margin-bottom:18px}
+.options{display:flex;flex-direction:column;gap:10px}
+.option{display:flex;align-items:center;gap:12px;border:2px solid #e2e8f0;padding:13px;border-radius:10px;cursor:pointer;line-height:1.5}
+.option:hover{background:#eef2ff;border-color:#6366f1}
+.option input{accent-color:#6366f1;width:18px;height:18px;flex-shrink:0}
+.option:has(input:checked){background:#eef2ff;border-color:#6366f1;color:#4338ca;font-weight:bold}
+.correct{background:#dcfce7!important;border-color:#16a34a!important;color:#14532d!important}
+.wrong{background:#fee2e2!important;border-color:#ef4444!important;color:#991b1b!important}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:22px 0}
+.stat{background:#f8fafc;padding:18px 8px;border:1px solid #e2e8f0;border-radius:12px}
+.stat strong{display:block;font-size:25px;color:#4f46e5;margin-top:8px}
+#result-message{line-height:1.8}
+@media(max-width:600px){
+body{padding-top:85px}
+.header{padding:12px}
+.header h3{font-size:12px}
+.timer{font-size:19px;padding:7px}
+.panel{padding:22px 15px}
+.question{padding:17px 13px}
+.q-text{font-size:15px}
+.option{font-size:14px;padding:11px}
+.stats{grid-template-columns:1fr}
+}
+</style>
 </head>
 <body>
 
-    <div class="header-bar">
-        <div class="header-title">IT Asoslari: Yakuniy Test (30 savol)</div>
-        <div class="timer-box" id="timer">40:00</div>
-    </div>
+<header class="header">
+<h3>💻 IT ASOSLARI | YAKUNIY TEST</h3>
+<div class="timer" id="timer">40:00</div>
+</header>
 
-    <div class="container">
-        <!-- Boshlash oynasi -->
-        <div class="intro-card" id="start-screen">
-            <h2>Kompyuter arxitekturasi, Windows va Bulutli xizmatlar</h2>
-            <p style="margin: 15px 0; color: #475569; line-height: 1.6;">
-                Test 30 ta savoldan iborat. Barcha savollarni yechish uchun <b>40 daqiqa</b> vaqt beriladi.<br>
-                O'tish bali: <b>50%</b> (kamida 15 ta to'g'ri javob). Natija 50% dan kam bo'lsa, savollar o'rni almashgan holda testni qaytadan ishlashingiz shart bo'ladi.
-            </p>
-            <button class="btn" onclick="startTest()">Testni boshlash</button>
-        </div>
+<main class="container">
 
-        <!-- Natija oynasi -->
-        <div class="result-card hidden" id="result-screen">
-            <h2 id="result-heading">Test natijasi</h2>
-            <p id="result-message" style="margin-top: 10px; font-size: 1.1rem;"></p>
-            <div class="stats-grid">
-                <div class="stat-box">
-                    <div>To'g'ri javoblar</div>
-                    <div class="stat-value" id="correct-count">0 / 30</div>
-                </div>
-                <div class="stat-box">
-                    <div>Natija foizi</div>
-                    <div class="stat-value" id="score-percent">0%</div>
-                </div>
-                <div class="stat-box">
-                    <div>Sarflangan vaqt</div>
-                    <div class="stat-value" id="time-spent">00:00</div>
-                </div>
-            </div>
-            <div id="action-buttons"></div>
-        </div>
+<section class="panel" id="start-screen">
+<h2>🎓 Informatika va IT asoslari</h2>
+<p>Kompyuter arxitekturasi, Windows va bulutli xizmatlar bo'yicha yakuniy test.</p>
+<div class="stats">
+<div class="stat">📝 Savollar<strong>30</strong></div>
+<div class="stat">⏱ Vaqt<strong>40 min</strong></div>
+<div class="stat">🎯 O'tish bali<strong>50%</strong></div>
+</div>
+<p>Testdan o'tish uchun kamida 15 ta to'g'ri javob bering.</p>
+<button class="btn" onclick="startTest()">🚀 TESTNI BOSHLASH</button>
+</section>
 
-        <!-- Savollar ro'yxati -->
-        <form id="quiz-form" class="hidden" onsubmit="event.preventDefault(); finishTest();">
-            <div id="questions-container"></div>
-            <div style="text-align: center;">
-                <button type="submit" class="btn" id="submit-btn">Testni yakunlash va natijani ko'rish</button>
-            </div>
-        </form>
-    </div>
+<section class="panel hidden" id="result-screen">
+<h2 id="result-heading">Test natijasi</h2>
+<p id="result-message"></p>
+<div class="stats">
+<div class="stat">To'g'ri javob<strong id="correct-count">0/30</strong></div>
+<div class="stat">Natija<strong id="score-percent">0%</strong></div>
+<div class="stat">Sarflangan vaqt<strong id="time-spent">00:00</strong></div>
+</div>
+<div id="action-buttons"></div>
+</section>
 
-    <script>
-        const questionsData = [
-            // 1. Bulutli xizmatlar va hamkorlik
-            {
-                q: "Bulutli xizmatlarning qaysi turida foydalanuvchiga tayyor dastur beriladi va hech narsa o'rnatish talab qilinmaydi (masalan, Gmail, Google Docs, Zoom)?",
-                options: ["SaaS (Software as a Service)", "PaaS (Platform as a Service)", "IaaS (Infrastructure as a Service)", "DevOps"],
-                answer: 0
-            },
-            {
-                q: "Google Drive bepul tarifida necha GB joy beradi va bu xotira yana qaysi xizmatlar bilan umumiy hisoblanadi?",
-                options: ["5 GB — faqat Drive uchun", "15 GB — Gmail va Google Photos bilan umumiy", "2 GB — YouTube va Gmail bilan umumiy", "50 GB — barcha Google xizmatlari uchun"],
-                answer: 1
-            },
-            {
-                q: "Google Drive'da faylni boshqalarga ulashishda qaysi ruxsat darajasi faylni o'qish va izoh qoldirish imkonini beradi, lekin matnni o'zgartirishga ruxsat bermaydi?",
-                options: ["Ko'ruvchi (Viewer)", "Izohlovchi (Commenter)", "Muharrir (Editor)", "Administrator"],
-                answer: 1
-            },
-            {
-                q: "Google Meet'ning bepul tarifida 3 va undan ortiq kishilik guruh qo'ng'irog'i necha daqiqadan keyin avtomatik tugaydi?",
-                options: ["40 daqiqa", "45 daqiqa", "60 daqiqa", "90 daqiqa"],
-                answer: 2
-            },
-            {
-                q: "Git va GitHub'da jamoadoshning bulutdagi loyihasini o'z kompyuteringizga ilk bor ko'chirib olish buyrug'i qaysi?",
-                options: ["git push origin main", "git clone <havola>", "git commit -m", "git checkout -b"],
-                answer: 1
-            },
-            {
-                q: "Saytni internetga joylab, hamma ko'ra oladigan qilish jarayoni nima deb ataladi?",
-                options: ["Deploy", "Commit", "Sinxronizatsiya", "Phishing"],
-                answer: 0
-            },
-            {
-                q: "Ikki bosqichli tasdiqlash (2FA) qanday tamoyilga asoslanadi?",
-                options: [
-                    "Faqat ikkita murakkab parol kiritishga",
-                    "Siz bilgan narsa (parol) + sizda bor narsa (telefonga kelgan kod)",
-                    "Har kuni parolni avtomatik yangilab turishga",
-                    "Faqat bitta kompyuterdan hisobga kirishga"
-                ],
-                answer: 1
-            },
-            // 2. Axborot o'lchov birliklari va Windows fayl boshqaruvi
-            {
-                q: "Kompyuter xotirasida 8 bit bilan nechta turli holatni (kombinatsiyani) ifodalash mumkin?",
-                options: ["8 ta", "64 ta", "256 ta", "1024 ta"],
-                answer: 2
-            },
-            {
-                q: "8192 bit axborot necha Kilobaytga (KB) teng?",
-                options: ["1 KB", "8 KB", "1024 KB", "0.5 KB"],
-                answer: 0
-            },
-            {
-                q: "Internet tezligi 100 Mbit/s bo'lsa, ideal holatda 1 GB (1024 MB) hajmli fayl taxminan necha soniyada yuklanadi?",
-                options: ["10 soniya", "82 soniya", "12.5 soniya", "100 soniya"],
-                answer: 1
-            },
-            {
-                q: "Do'kondan sotib olingan '500 GB' hajmli qattiq disk Windows tizimida nega taxminan 465–466 GB bo'lib ko'rinadi?",
-                options: [
-                    "Qolgan joyni viruslar egallab olgan bo'ladi",
-                    "Ishlab chiqaruvchi 1 GB = 1000 MB deb, Windows esa 1024 MB deb hisoblaydi",
-                    "Windows tizim fayllari 35 GB joyni yashirib qo'yadi",
-                    "Diskning bir qismi ishlamaydigan holatda bo'ladi"
-                ],
-                answer: 1
-            },
-            {
-                q: "Windows'da fayl nomida quyidagi qaysi belgilardan foydalanish TAQIQLANGAN?",
-                options: ["_ - ( ) !", "\\ / : * ? \" < > |", "@ # $ % ^ &", "+ = ~ ` ;"],
-                answer: 1
-            },
-            {
-                q: "Bir disk ichida (masalan, C: diskdan C: diskdagi boshqa papkaga) faylni sichqoncha bilan sudrab tashlash (drag & drop) qanday amal bajaradi?",
-                options: ["Faylni nusxalaydi (Copy)", "Faylni ko'chiradi (Move)", "Fayl yorlig'ini (Shortcut) yaratadi", "Faylni arxivlaydi"],
-                answer: 1
-            },
-            {
-                q: "Windows'da faylni Savatga (Recycle Bin) tushirmasdan, butunlay o'chirib yuborish uchun qaysi tugmalar birikmasi bosiladi?",
-                options: ["Delete", "Ctrl + D", "Shift + Delete", "Alt + F4"],
-                answer: 2
-            },
-            {
-                q: "File Explorer oynasida yangi papka yaratish uchun qaysi tezkor tugmalar birikmasi ishlatiladi?",
-                options: ["Ctrl + N", "Ctrl + Shift + N", "Win + E", "Alt + Enter"],
-                answer: 1
-            },
-            // 3. Kompyuter arxitekturasi
-            {
-                q: "Zamonaviy kompyuterlarning asosini tashkil etuvchi, dastur va ma'lumotlar bitta xotirada saqlanishini ko'zda tutuvchi arxitektura kimning nomi bilan ataladi?",
-                options: ["Alan Tyuring", "Jon fon Neyman", "Bill Geyts", "Linus Torvalds"],
-                answer: 1
-            },
-            {
-                q: "Kompyuter o'chiq turganda ham ona plataga berib turiladigan va yoqish tugmasi ishlashini ta'minlaydigan kuchlanish liniyasi qaysi?",
-                options: ["+12V", "+3.3V", "+5VSB", "220V AC"],
-                answer: 2
-            },
-            {
-                q: "Kompyuter har safar yoqilganda sana va soat eski yilga qaytib qolsa, ona platadagi qaysi qismni almashtirish kerak bo'ladi?",
-                options: ["ROM chipini", "CMOS batareyasini (CR2032)", "CPU kulerini", "Chipsetni"],
-                answer: 1
-            },
-            {
-                q: "Protsessor (CPU) ichidagi eng tezkor va eng kichik hajmli xotira qaysi?",
-                options: ["RAM", "L3 kesh", "Registrlar", "NVMe SSD"],
-                answer: 2
-            },
-            {
-                q: "SSD disklarga oid quyidagi fikrlardan qaysi biri TO'G'RI?",
-                options: [
-                    "M.2 shaklidagi barcha SSD lar albatta NVMe tezligida ishlaydi",
-                    "M.2 bu shakl (o'lcham va slot), u SATA ham, NVMe ham bo'lishi mumkin",
-                    "SATA SSD tezligi 7000 MB/s gacha yetadi",
-                    "NVMe SSD ichida aylanuvchi magnit plastinalar bo'ladi"
-                ],
-                answer: 1
-            },
-            {
-                q: "Kompyuter yoqilganda qurilmalarning (CPU, RAM, GPU, klaviatura) o'z-o'zini tekshirish jarayoni nima deb ataladi?",
-                options: ["BIOS", "POST (Power-On Self-Test)", "Bootloader", "UEFI Secure Boot"],
-                answer: 1
-            },
-            {
-                q: "Qaysi tizim 2 TB dan katta disklarni (GPT jadvali) qo'llab-quvvatlaydi, sichqoncha bilan boshqariladigan grafik menyuga va Secure Boot himoyasiga ega?",
-                options: ["Eski BIOS (Legacy)", "UEFI", "MS-DOS", "FAT32"],
-                answer: 1
-            },
-            {
-                q: "Klaviaturada biror tugma bosilganda, qurilmaning protsessorga 'Diqqat, menda yangi ma'lumot bor!' deya yuboradigan signali nima deyiladi?",
-                options: ["Drayver (Driver)", "Uzilish (Interrupt)", "Shina (Bus)", "Kesh (Cache)"],
-                answer: 1
-            },
-            // 4. Operatsion tizimlar va Windows muhiti
-            {
-                q: "Internetdagi serverlarning katta qismi qaysi operatsion tizim oilasida ishlaydi?",
-                options: ["Windows 11 Home", "Linux", "macOS", "iOS"],
-                answer: 1
-            },
-            {
-                q: "Veb-sahifa kodlarida (HTML/CSS) rasmlar va boshqa fayllarga murojaat qilishda qaysi turdagi yo'ldan (path) foydalanish tavsiya etiladi?",
-                options: [
-                    "To'liq yo'l (masalan, C:\\Users\\Ali\\images\\logo.png)",
-                    "Nisbiy yo'l (masalan, images/logo.png)",
-                    "Tizim yo'li (C:\\Windows\\System32)",
-                    "Fayl yo'lini yozish shart emas"
-                ],
-                answer: 1
-            },
-            {
-                q: "Windows'da bitta fayl hajmi 4 GB dan oshmasligi chekloviga ega bo'lgan eski fayl tizimi qaysi?",
-                options: ["NTFS", "FAT32", "exFAT", "ext4"],
-                answer: 1
-            },
-            {
-                q: "Qotib qolgan dasturni majburan yopish uchun Task Manager'ni to'g'ridan-to'g'ri ochadigan klaviatura yorlig'i qaysi?",
-                options: ["Ctrl + Alt + Del", "Ctrl + Shift + Esc", "Win + R", "Alt + Tab"],
-                answer: 1
-            },
-            {
-                q: "CMD (buyruqlar qatori) da 'del a.txt' buyrug'i bajarilganda fayl qayerga tushadi?",
-                options: [
-                    "Savatga (Recycle Bin) tushadi",
-                    "Savatga tushmasdan butunlay o'chib ketadi",
-                    "Temp papkasiga ko'chiriladi",
-                    "Fayl yashirin holatga o'tadi"
-                ],
-                answer: 1
-            },
-            {
-                q: "Terminalda 'node' buyrug'ini yozganda \"'node' is not recognized as an internal or external command...\" xatosi chiqsa, muammoni qayerdan tuzatish kerak?",
-                options: [
-                    "BIOS sozlamalaridan",
-                    "Muhit o'zgaruvchilari (Environment Variables) dagi PATH ro'yxatidan",
-                    "Device Manager'dagi video karta drayveridan",
-                    "Windows Defender Firewall'dan"
-                ],
-                answer: 1
-            },
-            {
-                q: "Internet ishlamay qolganda uchta ping tekshiruvi o'tkazildi: 'ping 192.168.1.1' va 'ping 8.8.8.8' muvaffaqiyatli javob qaytardi, lekin 'ping google.com' ishlamadi. Muammo nimada?",
-                options: [
-                    "Wi-Fi yoki internet kabeli uzilgan",
-                    "Router ishdan chiqqan",
-                    "Internet bor, faqat DNS (domen nomlarini IP ga aylantirish) ishlamayapti",
-                    "Kompyuterning tarmoq kartasi kuygan"
-                ],
-                answer: 2
-            }
-        ];
+<form id="quiz-form" class="hidden">
+<div class="progress-card">
+<div class="progress-info">
+<span>📊 Test bajarilishi</span>
+<span id="progress-text">0 / 30</span>
+</div>
+<div class="progress">
+<div class="progress-fill" id="progress-fill"></div>
+</div>
+</div>
+<div id="questions-container"></div>
+<div style="text-align:center">
+<button type="submit" class="btn">✅ TESTNI YAKUNLASH</button>
+</div>
+</form>
+</main>
 
-        let currentQuestions = [];
-        let timerInterval;
-        const TOTAL_TIME = 40 * 60; // 40 daqiqa (soniyalarda)
-        let timeLeft = TOTAL_TIME;
+<script>
+const questionsData = [
+{q:"Bulutli xizmatlarning qaysi turida foydalanuvchiga tayyor dastur beriladi va hech narsa o'rnatish talab qilinmaydi (masalan, Gmail, Google Docs, Zoom)?",options:["SaaS (Software as a Service)","PaaS (Platform as a Service)","IaaS (Infrastructure as a Service)","DevOps"],answer:0},
+{q:"Google Drive bepul tarifida necha GB joy beradi va bu xotira yana qaysi xizmatlar bilan umumiy hisoblanadi?",options:["5 GB — faqat Drive uchun","15 GB — Gmail va Google Photos bilan umumiy","2 GB — YouTube va Gmail bilan umumiy","50 GB — barcha Google xizmatlari uchun"],answer:1},
+{q:"Google Drive'da faylni boshqalarga ulashishda qaysi ruxsat darajasi faylni o'qish va izoh qoldirish imkonini beradi, lekin matnni o'zgartirishga ruxsat bermaydi?",options:["Ko'ruvchi (Viewer)","Izohlovchi (Commenter)","Muharrir (Editor)","Administrator"],answer:1},
+{q:"Google Meet'ning bepul tarifida 3 va undan ortiq kishilik guruh qo'ng'irog'i necha daqiqadan keyin avtomatik tugaydi?",options:["40 daqiqa","45 daqiqa","60 daqiqa","90 daqiqa"],answer:2},
+{q:"Git va GitHub'da jamoadoshning bulutdagi loyihasini o'z kompyuteringizga ilk bor ko'chirib olish buyrug'i qaysi?",options:["git push origin main","git clone <havola>","git commit -m","git checkout -b"],answer:1},
+{q:"Saytni internetga joylab, hamma ko'ra oladigan qilish jarayoni nima deb ataladi?",options:["Deploy","Commit","Sinxronizatsiya","Phishing"],answer:0},
+{q:"Ikki bosqichli tasdiqlash (2FA) qanday tamoyilga asoslanadi?",options:["Faqat ikkita murakkab parol kiritishga","Siz bilgan narsa (parol) + sizda bor narsa (telefonga kelgan kod)","Har kuni parolni avtomatik yangilab turishga","Faqat bitta kompyuterdan hisobga kirishga"],answer:1},
+{q:"Kompyuter xotirasida 8 bit bilan nechta turli holatni (kombinatsiyani) ifodalash mumkin?",options:["8 ta","64 ta","256 ta","1024 ta"],answer:2},
+{q:"8192 bit axborot necha Kilobaytga (KB) teng?",options:["1 KB","8 KB","1024 KB","0.5 KB"],answer:0},
+{q:"Internet tezligi 100 Mbit/s bo'lsa, ideal holatda 1 GB (1024 MB) hajmli fayl taxminan necha soniyada yuklanadi?",options:["10 soniya","82 soniya","12.5 soniya","100 soniya"],answer:1},
+{q:"Do'kondan sotib olingan '500 GB' hajmli qattiq disk Windows tizimida nega taxminan 465–466 GB bo'lib ko'rinadi?",options:["Qolgan joyni viruslar egallab olgan bo'ladi","Ishlab chiqaruvchi 1 GB = 1000 MB deb, Windows esa 1024 MB deb hisoblaydi","Windows tizim fayllari 35 GB joyni yashirib qo'yadi","Diskning bir qismi ishlamaydigan holatda bo'ladi"],answer:1},
+{q:"Windows'da fayl nomida quyidagi qaysi belgilardan foydalanish TAQIQLANGAN?",options:["_ - ( ) !","\\ / : * ? \" < > |","@ # $ % ^ &","+ = ~ ` ;"],answer:1},
+{q:"Bir disk ichida faylni sichqoncha bilan sudrab tashlash qanday amal bajaradi?",options:["Faylni nusxalaydi (Copy)","Faylni ko'chiradi (Move)","Fayl yorlig'ini yaratadi","Faylni arxivlaydi"],answer:1},
+{q:"Windows'da faylni Savatga tushirmasdan butunlay o'chirish uchun qaysi tugmalar bosiladi?",options:["Delete","Ctrl + D","Shift + Delete","Alt + F4"],answer:2},
+{q:"File Explorer oynasida yangi papka yaratish uchun qaysi tugmalar ishlatiladi?",options:["Ctrl + N","Ctrl + Shift + N","Win + E","Alt + Enter"],answer:1},
+{q:"Zamonaviy kompyuterlarning asosini tashkil etuvchi arxitektura kimning nomi bilan ataladi?",options:["Alan Tyuring","Jon fon Neyman","Bill Geyts","Linus Torvalds"],answer:1},
+{q:"Kompyuter o'chiq turganda ham ona plataga berib turiladigan kuchlanish liniyasi qaysi?",options:["+12V","+3.3V","+5VSB","220V AC"],answer:2},
+{q:"Kompyuter har safar yoqilganda sana va soat eski yilga qaytsa, qaysi qismni almashtirish kerak?",options:["ROM chipini","CMOS batareyasini (CR2032)","CPU kulerini","Chipsetni"],answer:1},
+{q:"Protsessor ichidagi eng tezkor va eng kichik hajmli xotira qaysi?",options:["RAM","L3 kesh","Registrlar","NVMe SSD"],answer:2},
+{q:"SSD disklarga oid qaysi fikr TO'G'RI?",options:["M.2 shaklidagi barcha SSD lar albatta NVMe tezligida ishlaydi","M.2 bu shakl, u SATA ham, NVMe ham bo'lishi mumkin","SATA SSD tezligi 7000 MB/s gacha yetadi","NVMe SSD ichida aylanuvchi magnit plastinalar bo'ladi"],answer:1},
+{q:"Kompyuter yoqilganda qurilmalarning o'z-o'zini tekshirish jarayoni nima deyiladi?",options:["BIOS","POST (Power-On Self-Test)","Bootloader","UEFI Secure Boot"],answer:1},
+{q:"Qaysi tizim GPT, Secure Boot va grafik menyuni qo'llab-quvvatlaydi?",options:["Eski BIOS (Legacy)","UEFI","MS-DOS","FAT32"],answer:1},
+{q:"Klaviaturada tugma bosilganda protsessorga yuboriladigan signal nima deyiladi?",options:["Drayver (Driver)","Uzilish (Interrupt)","Shina (Bus)","Kesh (Cache)"],answer:1},
+{q:"Internetdagi serverlarning katta qismi qaysi operatsion tizim oilasida ishlaydi?",options:["Windows 11 Home","Linux","macOS","iOS"],answer:1},
+{q:"HTML/CSS sahifalarida fayllarga murojaat qilishda qaysi yo'ldan foydalanish tavsiya etiladi?",options:["To'liq yo'l","Nisbiy yo'l","Tizim yo'li","Fayl yo'lini yozish shart emas"],answer:1},
+{q:"Windows'da bitta fayl hajmi 4 GB dan oshmasligi chekloviga ega fayl tizimi qaysi?",options:["NTFS","FAT32","exFAT","ext4"],answer:1},
+{q:"Task Manager'ni to'g'ridan-to'g'ri ochadigan klaviatura yorlig'i qaysi?",options:["Ctrl + Alt + Del","Ctrl + Shift + Esc","Win + R","Alt + Tab"],answer:1},
+{q:"CMD da 'del a.txt' buyrug'i bajarilganda fayl qayerga tushadi?",options:["Savatga tushadi","Savatga tushmasdan butunlay o'chadi","Temp papkasiga ko'chiriladi","Yashirin holatga o'tadi"],answer:1},
+{q:"Terminalda 'node' buyrug'i tanilmasa, muammoni qayerdan tuzatish kerak?",options:["BIOS sozlamalaridan","Environment Variables dagi PATH ro'yxatidan","Video karta drayveridan","Windows Defender Firewall'dan"],answer:1},
+{q:"ping 192.168.1.1 va ping 8.8.8.8 ishlasa, lekin ping google.com ishlamasa, muammo nimada?",options:["Wi-Fi yoki kabel uzilgan","Router ishdan chiqqan","DNS ishlamayapti","Tarmoq kartasi kuygan"],answer:2}
+];
 
-        // Massiv elementlarini tasodifiy aralashtirish (Fisher-Yates algoritmi)
-        function shuffleArray(array) {
-            const arr = [...array];
-            for (let i = arr.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [arr[i], arr[j]] = [arr[j], arr[i]];
-            }
-            return arr;
-        }
+let currentQuestions=[];
+let timerInterval;
+const TOTAL_TIME=2400;
+let timeLeft=TOTAL_TIME;
+let testFinished=false;
 
-        function startTest() {
-            // Har safar savollar o'rnini almashtirish
-            currentQuestions = shuffleArray(questionsData);
-            timeLeft = TOTAL_TIME;
+function shuffleArray(arr){
+let a=[...arr];
+for(let i=a.length-1;i>0;i--){
+let j=Math.floor(Math.random()*(i+1));
+[a[i],a[j]]=[a[j],a[i]];
+}
+return a;
+}
 
-            document.getElementById('start-screen').classList.add('hidden');
-            document.getElementById('result-screen').classList.add('hidden');
-            document.getElementById('quiz-form').classList.remove('hidden');
-            document.getElementById('submit-btn').classList.remove('hidden');
+function startTest(){
+clearInterval(timerInterval);
+testFinished=false;
+currentQuestions=shuffleArray(questionsData);
+timeLeft=TOTAL_TIME;
 
-            renderQuestions();
-            startTimer();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
+document.getElementById('start-screen').classList.add('hidden');
+document.getElementById('result-screen').classList.add('hidden');
+document.getElementById('quiz-form').classList.remove('hidden');
 
-        function renderQuestions() {
-            const container = document.getElementById('questions-container');
-            container.innerHTML = '';
+renderQuestions();
+startTimer();
+window.scrollTo({top:0,behavior:'smooth'});
+}
 
-            currentQuestions.forEach((item, index) => {
-                const card = document.createElement('div');
-                card.className = 'question-card';
-                card.id = `q-card-${index}`;
+function renderQuestions(){
+let container=document.getElementById('questions-container');
+container.innerHTML='';
+let letters=['A','B','C','D'];
 
-                let optionsHTML = '';
-                item.options.forEach((opt, optIndex) => {
-                    optionsHTML += `
-                        <label class="option-label" id="opt-${index}-${optIndex}">
-                            <input type="radio" name="q${index}" value="${optIndex}">
-                            <span>${opt}</span>
-                        </label>
-                    `;
-                });
+currentQuestions.forEach((item,index)=>{
+let card=document.createElement('div');
+card.className='question';
+let optionsHTML='';
 
-                card.innerHTML = `
-                    <div class="question-text">${index + 1}. ${item.q}</div>
-                    <div class="options-list">${optionsHTML}</div>
-                `;
-                container.appendChild(card);
-            });
-        }
+item.options.forEach((opt,i)=>{
+optionsHTML+=`
+<label class="option" id="opt-${index}-${i}">
+<input type="radio" name="q${index}" value="${i}" onchange="updateProgress()">
+<span><b>${letters[i]}.</b> ${opt}</span>
+</label>`;
+});
 
-        function startTimer() {
-            clearInterval(timerInterval);
-            const timerEl = document.getElementById('timer');
-            timerEl.classList.remove('timer-warning');
+card.innerHTML=`
+<div class="q-number">SAVOL ${index+1}</div>
+<div class="q-text">${item.q}</div>
+<div class="options">${optionsHTML}</div>`;
+container.appendChild(card);
+});
+updateProgress();
+}
 
-            updateTimerDisplay();
-            timerInterval = setInterval(() => {
-                timeLeft--;
-                updateTimerDisplay();
+function updateProgress(){
+let answered=currentQuestions.filter((_,i)=>
+document.querySelector(`input[name="q${i}"]:checked`)
+).length;
+document.getElementById('progress-text').textContent=`${answered} / 30`;
+document.getElementById('progress-fill').style.width=(answered/30*100)+'%';
+}
 
-                if (timeLeft <= 300) { // Oxirgi 5 daqiqa qolganda qizil ogohlantirish
-                    timerEl.classList.add('timer-warning');
-                }
+function startTimer(){
+clearInterval(timerInterval);
+let timer=document.getElementById('timer');
+timer.classList.remove('warning');
+updateTimerDisplay();
 
-                if (timeLeft <= 0) {
-                    clearInterval(timerInterval);
-                    alert("Ajratilgan 40 daqiqa vaqt tugadi! Natijangiz hisoblanmoqda.");
-                    finishTest();
-                }
-            }, 1000);
-        }
+timerInterval=setInterval(()=>{
+if(timeLeft<=0){
+clearInterval(timerInterval);
+finishTest();
+alert("Vaqt tugadi! Test yakunlandi.");
+return;
+}
+timeLeft--;
+updateTimerDisplay();
+if(timeLeft<=300)timer.classList.add('warning');
+},1000);
+}
 
-        function updateTimerDisplay() {
-            const minutes = Math.floor(timeLeft / 60);
-            const seconds = timeLeft % 60;
-            document.getElementById('timer').textContent = 
-                `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-        }
+function updateTimerDisplay(){
+let m=Math.floor(timeLeft/60);
+let s=timeLeft%60;
+document.getElementById('timer').textContent=
+String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
+}
 
-        function finishTest() {
-            clearInterval(timerInterval);
-            let correctCount = 0;
+function finishTest(){
+if(testFinished)return;
+testFinished=true;
+clearInterval(timerInterval);
 
-            currentQuestions.forEach((item, index) => {
-                const selected = document.querySelector(`input[name="q${index}"]:checked`);
-                const inputs = document.querySelectorAll(`input[name="q${index}"]`);
-                inputs.forEach(inp => inp.disabled = true);
+let correct=0;
 
-                const correctLabel = document.getElementById(`opt-${index}-${item.answer}`);
-                correctLabel.classList.add('correct-answer');
+currentQuestions.forEach((item,index)=>{
+let selected=document.querySelector(`input[name="q${index}"]:checked`);
+document.querySelectorAll(`input[name="q${index}"]`).forEach(x=>x.disabled=true);
 
-                if (selected) {
-                    const userVal = parseInt(selected.value);
-                    if (userVal === item.answer) {
-                        correctCount++;
-                    } else {
-                        const wrongLabel = document.getElementById(`opt-${index}-${userVal}`);
-                        wrongLabel.classList.add('wrong-answer');
-                    }
-                }
-            });
+document.getElementById(`opt-${index}-${item.answer}`).classList.add('correct');
 
-            const percent = Math.round((correctCount / currentQuestions.length) * 100);
-            const spentSeconds = TOTAL_TIME - timeLeft;
-            const spentMin = Math.floor(spentSeconds / 60);
-            const spentSec = spentSeconds % 60;
+if(selected){
+let value=Number(selected.value);
+if(value===item.answer)correct++;
+else document.getElementById(`opt-${index}-${value}`).classList.add('wrong');
+}
+});
 
-            document.getElementById('correct-count').textContent = `${correctCount} / ${currentQuestions.length}`;
-            document.getElementById('score-percent').textContent = `${percent}%`;
-            document.getElementById('time-spent').textContent = 
-                `${String(spentMin).padStart(2, '0')}:${String(spentSec).padStart(2, '0')}`;
+let percent=Math.round(correct/30*100);
+let spent=TOTAL_TIME-timeLeft;
+let minutes=Math.floor(spent/60);
+let seconds=spent%60;
 
-            const resultHeading = document.getElementById('result-heading');
-            const resultMessage = document.getElementById('result-message');
-            const actionButtons = document.getElementById('action-buttons');
+document.getElementById('correct-count').textContent=correct+' / 30';
+document.getElementById('score-percent').textContent=percent+'%';
+document.getElementById('time-spent').textContent=
+String(minutes).padStart(2,'0')+':'+String(seconds).padStart(2,'0');
 
-            if (percent < 50) {
-                resultHeading.textContent = "Testdan o'ta olmadingiz!";
-                resultHeading.style.color = "var(--danger)";
-                resultMessage.innerHTML = `Siz <b>${percent}%</b> natija ko'rsatdingiz. O'tish uchun kamida <b>50%</b> to'plash kerak. Pastda xatolaringizni ko'rib chiqing va testni qaytadan ishlang (savollar o'rni almashadi).`;
-                actionButtons.innerHTML = `<button class="btn btn-retry" onclick="startTest()">Qaytadan ishlash</button>`;
-            } else {
-                resultHeading.textContent = "Tabriklaymiz! Test muvaffaqiyatli topshirildi!";
-                resultHeading.style.color = "var(--success)";
-                resultMessage.innerHTML = `Siz <b>${percent}%</b> natija bilan o'tish ballini to'pladingiz. Pastda barcha javoblaringiz tahlilini ko'rishingiz mumkin.`;
-                actionButtons.innerHTML = `<button class="btn" onclick="startTest()">Yana bir bor mashq qilish</button>`;
-            }
+let heading=document.getElementById('result-heading');
+let message=document.getElementById('result-message');
+let actions=document.getElementById('action-buttons');
 
-            document.getElementById('submit-btn').classList.add('hidden');
-            document.getElementById('result-screen').classList.remove('hidden');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-    </script>
+if(percent<50){
+heading.textContent="❌ Testdan o'ta olmadingiz!";
+heading.style.color='#ef4444';
+message.innerHTML=`Natijangiz: <b>${percent}%</b>. O'tish uchun kamida 50% kerak.`;
+actions.innerHTML=`<button class="btn" onclick="startTest()">🔄 QAYTA ISHLASH</button>`;
+}else{
+heading.textContent="🎉 Tabriklaymiz! Testdan o'tdingiz!";
+heading.style.color='#16a34a';
+message.innerHTML=`Siz ${percent}% natija bilan testdan muvaffaqiyatli o'tdingiz!`;
+actions.innerHTML=`<button class="btn" onclick="startTest()">🔄 QAYTA MASHQ QILISH</button>`;
+}
+
+document.getElementById('quiz-form').classList.remove('hidden');
+document.getElementById('result-screen').classList.remove('hidden');
+document.querySelector('#quiz-form button[type="submit"]').classList.add('hidden');
+window.scrollTo({top:0,behavior:'smooth'});
+}
+
+document.getElementById('quiz-form').addEventListener('submit',function(e){
+e.preventDefault();
+finishTest();
+});
+</script>
 </body>
 </html>
